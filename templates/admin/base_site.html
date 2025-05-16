@@ -1,0 +1,65 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}Oishii Admin{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+  <a href="{% url 'admin:index' %}">
+    Oishii Admin Панель
+  </a>
+</h1>
+{% endblock %}
+{% block extrahead %}
+  {% static 'logo.png' as logo_url %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/custom_admin.css' %}">
+
+  <style>
+    :root {
+      --main-color: #f15a29;
+      --background: #fdf6ef;
+      --header-bg: #3b4651;
+      --white: #fff;
+    }
+
+    body {
+      background-color: var(--background);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #header {
+      background: var(--header-bg);
+    }
+
+    #header h1 {
+      font-size: 1.8rem;
+    }
+
+    #header h1 a {
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    #branding h1::before {
+      content: "";
+      display: inline-block;
+      background: url("{{ logo_url }}") no-repeat center;
+      background-size: contain;
+      width: 40px;
+      height: 40px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+
+    #footer {
+      background-color: var(--header-bg);
+      color: white;
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 10px;
+    }
+  </style>
+{% endblock %}
+
+
+{% block nav-global %}{% endblock %}

@@ -1,0 +1,97 @@
+:root {
+  --main-color: #f15a29;
+  --background: #fdf6ef;
+  --header-bg: #3b4651;
+  --white: #fff;
+  --font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+  background-color: var(--background);
+  font-family: var(--font);
+}
+
+#header {
+  background-color: var(--header-bg);
+  padding: 10px 20px;
+}
+
+#header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+#header h1 a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+#branding h1::before {
+  content: "";
+  display: inline-block;
+  background: url("/static/logo.png") no-repeat center;
+  background-size: contain;
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+#user-tools {
+  color: var(--white);
+}
+
+a:link, a:visited {
+  color: var(--main-color);
+}
+
+.module h2, .module caption, .inline-group h2 {
+  color: var(--header-bg);
+}
+
+.button, input[type="submit"], input[type="button"], .submit-row input {
+  background-color: var(--main-color);
+  color: var(--white);
+  border: none;
+  padding: 6px 12px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.button:hover, input[type="submit"]:hover, .submit-row input:hover {
+  background-color: #d44e1f;
+}
+
+#footer {
+  background-color: var(--header-bg);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.85rem;
+}
+
+/* Table styling */
+table {
+  background-color: #fff;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #eee;
+  color: #333;
+  padding: 8px;
+}
+
+td {
+  padding: 8px;
+  border-top: 1px solid #ddd;
+}
+
+/* Login page customization */
+.login .submit-row input {
+  background-color: var(--main-color);
+}
+
+.login .submit-row input:hover {
+  background-color: #d44e1f;
+}
