@@ -44,12 +44,16 @@
       font-size: 1.5rem;
     }
 
-    .menu a {
-      color: var(--white);
-      margin-left: 1.5rem;
-      text-decoration: none;
-      font-weight: bold;
-    }
+  .menu a {
+    color: var(--white);
+    margin-left: 1.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  .menu a:hover {
+    color: var(--main-color);
+  }
 
     main {
       flex: 1; /* дозволяє займати весь доступний простір */
@@ -105,6 +109,7 @@
       <a href="{% url 'home' %}">Головна</a>
       <a href="#">Меню</a>
       <a href="#">Бронювання</a>
+        <a href="{% url 'admin:login' %}">Вхід адмін</a>
     </div>
   </nav>
 
