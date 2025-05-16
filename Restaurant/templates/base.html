@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>{% block title %}Oishii{% endblock %}</title>
+  <title>{% block title %}OishiI{% endblock %}</title>
   {% load static %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -13,10 +13,17 @@
       --white: #fff;
     }
 
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--background);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
     }
 
     nav {
@@ -42,6 +49,10 @@
       margin-left: 1.5rem;
       text-decoration: none;
       font-weight: bold;
+    }
+
+    main {
+      flex: 1; /* дозволяє займати весь доступний простір */
     }
 
     .hero {
@@ -87,8 +98,8 @@
 <body>
   <nav>
     <div style="display: flex; align-items: center;">
-      <img src="{% static 'logo.png' %}" alt="Oishii Logo" class="logo">
-      <strong>OIshiI</strong>
+      <img src="{% static 'logo.png' %}" alt="Huyoshi Logo" class="logo">
+      <strong>Oishii</strong>
     </div>
     <div class="menu">
       <a href="{% url 'home' %}">Головна</a>
@@ -97,11 +108,14 @@
     </div>
   </nav>
 
-  {% block content %}{% endblock %}
+  <main>
+    {% block content %}{% endblock %}
+  </main>
 
   <footer>
     © 2025 Oishii. Усі права захищені.
   </footer>
 </body>
 </html>
+
 
