@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Забронювати столик</title>
+
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F7F6F2;
+            color: #82868F;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #FF5D28;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            color: #fff;
+            margin: 0;
+            font-weight: 600;
+            font-size: 28px;
+        }
+        main {
+            max-width: 480px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 0 20px rgba(75, 86, 106, 0.2);
+        }
+        h2 {
+            color: #4B566A;
+            font-weight: 600;
+            margin-bottom: 24px;
+            font-size: 24px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #4B566A;
+            font-size: 14px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 20px;
+            border: 1px solid #82868F;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #4B566A;
+            font-family: 'Montserrat', sans-serif;
+        }
+        input[type="submit"] {
+            background-color: #4B566A;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 14px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #FF5D28;
+        }
+        .back-home {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #FF5D28;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-home:hover {
+            text-decoration: underline;
+        }
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ресторан "HUYOSHI"</h1>
+    </header>
+    <main>
+        <a href="{% url 'menu' %}" class="back-home">На головну</a>
+
+        <h2>Забронювати столик</h2>
+
+        {% if success %}
+            <div class="success-message">Дякуємо! Ваше бронювання успішно створено.</div>
+        {% endif %}
+
+        <form method="POST" id="reservation-form" novalidate>
+            {% csrf_token %}
+            <label for="first_name">Ім'я</label>
+            <input id="first_name" name="first_name" type="text" required />
+
+            <label for="last_name">Прізвище</label>
+            <input id="last_name" name="last_name" type="text" required />
+
+            <label for="phone">Телефон</label>
+            <input id="phone" name="phone" type="tel" required pattern="^\+?[0-9\s\-]{7,15}$" title="Введіть коректний номер телефону" />
+
+            <label for="guests_number">Кількість гостей</label>
+            <input id="guests_number" name="guests_number" type="number" min="1" max="20" required />
+
+            <label for="reservation_date">Дата бронювання</label>
+            <input id="reservation_date" name="reservation_date" type="date" required />
+
+            <label for="reservation_time">Час бронювання</label>
+            <input id="reservation_time" name="reservation_time" type="time" required min="08:00" max="22:00" />
+
+            <label for="details">Додаткові побажання</label>
+            <textarea id="details" name="details" rows="3"></textarea>
+
+            <input type="submit" value="Забронювати столик" />
+        </form>
+    </main>
+
+    <script>
+        const dateInput = document.getElementById('reservation_date');
+        const timeInput = document.getElementById('reservation_time');
+        const form = document.getElementById('reservation-form');
+
+        const now = new Date();
+        const today = now.toISOString().split('T')[0];
+        dateInput.min = today;
+
+        form.addEventListener('submit', function(e) {
+            const selectedDate = dateInput.value;
+            const selectedTime = timeInput.value;
+
+            if (!selectedDate || !selectedTime) return;
+
+            const [hours, minutes] = selectedTime.split(':').map(Number);
+            const selectedDateTime = new Date(selectedDate);
+            selectedDateTime.setHours(hours, minutes, 0, 0);
+
+            const currentTime = new Date();
+
+            if (selectedDate === today && selectedDateTime < currentTime) {
+                e.preventDefault();
+                alert('Виберіть час, який ще не минув.');
+                return;
+            }
+        });
+
+    </script>
+</body>
+</html>
+
+

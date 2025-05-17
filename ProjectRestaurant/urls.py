@@ -18,9 +18,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Restaurant.views.menu import menu_view
+from Restaurant.views.reservation_views import ReservationView
 
 urlpatterns = [
-path('admin/', admin.site.urls),
-    path('', menu_view, name='menu'),
+    path('admin/', admin.site.urls),
+    path('', menu_view, name='menu'),  # головна
+    path('reservation/', ReservationView.as_view(), name='reservation'),
     #    path('admin/', admin.site.urls),
 ]
