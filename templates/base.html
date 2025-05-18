@@ -18,7 +18,8 @@
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--background);
+      background: url("{% static 'background.png' %}") no-repeat center center fixed;
+      background-size: cover;
     }
 
     body {
@@ -90,6 +91,133 @@
       font-size: 1rem;
     }
 
+    .info-section h2,
+    .info-section p {
+    color: #3b4651;
+    }
+
+    .menu-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #3b4651;
+    }
+
+    .category-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    }
+
+    .category-button {
+    background-color: #3b4651;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    }
+    .category-button.active {
+    background-color: var(--main-color);
+    }
+
+    .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    }
+
+    .card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 220px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    color: #3b4651;
+    text-decoration: none;
+    }
+
+    .card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    }
+
+    .back-button {
+    background-color: #3b4651;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 2rem;
+    transition: background-color 0.3s ease;
+    }
+    .back-button:hover {
+    background-color: var(--main-color);
+    }
+    .detail-container {
+    padding: 2rem;
+    max-width: 900px;
+    margin: auto;
+    color: #3b4651;
+    }
+    .detail-wrapper {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    }
+    .detail-image {
+    width: 300px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    }
+    .detail-image img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
+    }
+    .detail-image p {
+    font-size: 1.3rem;
+    margin: 0;
+    }
+    .detail-info {
+    flex: 1;
+    font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    }
+    .tag {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    }
+    .tag.spicy {
+    color: #E74C3C;
+    }
+    .tag.vegetarian {
+    color: #2ECC71;
+    }
+    .tag.alcoholic {
+    color: #3b4651;
+    }
+
     footer {
       background-color: var(--header-bg);
       color: white;
@@ -102,12 +230,12 @@
 <body>
   <nav>
     <div style="display: flex; align-items: center;">
-      <img src="{% static 'logo.png' %}" alt="Huyoshi Logo" class="logo">
+      <img src="{% static 'logo.png' %}" alt="Oishii Logo" class="logo">
       <strong>Oishii</strong>
     </div>
     <div class="menu">
       <a href="{% url 'home' %}">Головна</a>
-      <a href="#">Меню</a>
+      <a href="{% url 'menu' %}">Меню</a>
       <a href="{% url 'reservation_list' %}">Бронювання</a>
         <a href="{% url 'admin:login' %}">Вхід адмін</a>
     </div>
