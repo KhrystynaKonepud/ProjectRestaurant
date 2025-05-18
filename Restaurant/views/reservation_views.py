@@ -4,6 +4,8 @@ from Restaurant.models import Reservation
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.utils.decorators import method_decorator
 
 class ReservationView(View):
     template_name = 'reservation_form.html'
@@ -29,6 +31,8 @@ class ReservationView(View):
             'success': True
         })
 
+@method_decorator(login_required(login_url='/admin/login/'), name='dispatch')
+@method_decorator(user_passes_test(lambda u: u.is_staff), name='dispatch')
 class ReservationListView(View):
     template_name = 'reservation_list.html'
 

@@ -1,37 +1,11 @@
-{% extends "admin/base_site.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block title %}Мої бронювання — Oishii{% endblock %}
 
-{% block extrastyle %}
-<link rel="stylesheet" href="{% static 'css/admin_custom.css' %}">
-<style>
-  .reservation-item {
-    border: 1px solid #ccc;
-    padding: 12px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    max-width: 600px;
-  }
-  .cancel-btn {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .cancel-btn:hover {
-    background-color: #c82333;
-  }
-  form.filter-form {
-    margin-bottom: 20px;
-  }
-</style>
-{% endblock %}
-
 {% block content %}
-<h1 style="color: var(--header-bg); text-align: left;">Мої бронювання</h1>
+<div class="content-wrapper">
+<h1 style="color: var(--header-bg); text-align: left;">Бронювання</h1>
 
 <form method="get" class="filter-form">
   <label for="date">Фільтр за датою:</label>
@@ -59,5 +33,5 @@
 {% else %}
   <p>Немає бронювань.</p>
 {% endif %}
-
+</div>
 {% endblock %}
