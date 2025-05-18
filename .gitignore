@@ -366,12 +366,3 @@ pyrightconfig.json
 # Ignore all local history of files
 .history
 .ionide
-
-# Python cache
-pycache/
-*.py[cod]
-
-# SQLite database
-db.sqlite3
-
-# End of https://www.toptal.com/developers/gitignore/api/django,python,pycharm+all,visualstudiocode
