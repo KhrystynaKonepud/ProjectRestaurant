@@ -243,7 +243,7 @@ input[type="text"],
 
       <a href="{% url 'home' %}">Головна</a>
       <a href="#">Меню</a>
-      <a href="#">Бронювання</a>
+      <a href="{% url 'reservation_list' %}">Бронювання</a>
         {% if request.user.is_authenticated %}
     <form action="{% url 'admin:logout' %}" method="post" style="display:inline;">
   {% csrf_token %}

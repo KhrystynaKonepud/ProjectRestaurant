@@ -1,169 +1,111 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Забронювати столик</title>
+{% extends "admin/base_site.html" %}
+{% load static %}
 
-     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+{% block title %}Бронювання столика — Oishii{% endblock %}
 
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #F7F6F2;
-            color: #82868F;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #FF5D28;
-            padding: 20px;
-            text-align: center;
-        }
-        header h1 {
-            color: #fff;
-            margin: 0;
-            font-weight: 600;
-            font-size: 28px;
-        }
-        main {
-            max-width: 480px;
-            margin: 40px auto;
-            background: #fff;
-            border-radius: 12px;
-            padding: 32px;
-            box-shadow: 0 0 20px rgba(75, 86, 106, 0.2);
-        }
-        h2 {
-            color: #4B566A;
-            font-weight: 600;
-            margin-bottom: 24px;
-            font-size: 24px;
-            text-align: center;
-        }
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            color: #4B566A;
-            font-size: 14px;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 10px 12px;
-            margin-bottom: 20px;
-            border: 1px solid #82868F;
-            border-radius: 6px;
-            font-size: 16px;
-            color: #4B566A;
-            font-family: 'Montserrat', sans-serif;
-        }
-        input[type="submit"] {
-            background-color: #4B566A;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 16px;
-            padding: 14px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-        }
-        input[type="submit"]:hover {
-            background-color: #FF5D28;
-        }
-        .back-home {
-            display: inline-block;
-            margin-bottom: 24px;
-            color: #FF5D28;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .back-home:hover {
-            text-decoration: underline;
-        }
-        .success-message {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            border: 1px solid #c3e6cb;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Ресторан "HUYOSHI"</h1>
-    </header>
-    <main>
-        <a href="{% url 'menu' %}" class="back-home">На головну</a>
+{% block extrastyle %}
+  <link rel="stylesheet" href="{% static 'css/admin_custom.css' %}">
+{% endblock %}
 
-        <h2>Забронювати столик</h2>
+{% block content %}
+<div id="content" class="login-box">
+  <h1 style="color: var(--header-bg); text-align: left;">Забронювати столик</h1>
 
-        {% if success %}
-            <div class="success-message">Дякуємо! Ваше бронювання успішно створено.</div>
-        {% endif %}
+  {% if success %}
+    <div style="background:#d4edda;
+                color:#155724;
+                border:1px solid #c3e6cb;
+                padding:16px;
+                border-radius:8px;
+                margin-bottom:20px;
+                text-align:left;
+                font-weight:600;
+                font-size:16px;
+                max-width: 400px;
+                word-wrap: break-word;">
+      Дякуємо! Ваше бронювання створено.
+    </div>
+  {% endif %}
 
-        <form method="POST" id="reservation-form" novalidate>
-            {% csrf_token %}
-            <label for="first_name">Ім'я</label>
-            <input id="first_name" name="first_name" type="text" required />
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
 
-            <label for="last_name">Прізвище</label>
-            <input id="last_name" name="last_name" type="text" required />
+  {% if not success %}
+  <form method="post" id="reservation-form">
+    {% csrf_token %}
 
-            <label for="phone">Телефон</label>
-            <input id="phone" name="phone" type="tel" required pattern="^\+?[0-9\s\-]{7,15}$" title="Введіть коректний номер телефону" />
+    <div class="form-row">
+      <label for="first_name">Ім’я:</label>
+      <input type="text" id="first_name" name="first_name" required>
+    </div>
 
-            <label for="guests_number">Кількість гостей</label>
-            <input id="guests_number" name="guests_number" type="number" min="1" max="20" required />
+    <div class="form-row">
+      <label for="last_name">Прізвище:</label>
+      <input type="text" id="last_name" name="last_name" required>
+    </div>
 
-            <label for="reservation_date">Дата бронювання</label>
-            <input id="reservation_date" name="reservation_date" type="date" required />
+    <div class="form-row">
+      <label for="phone">Телефон:</label>
+      <input type="tel" id="phone" name="phone" required pattern="^\+?[0-9\s\-]{7,15}$">
+    </div>
 
-            <label for="reservation_time">Час бронювання</label>
-            <input id="reservation_time" name="reservation_time" type="time" required min="08:00" max="22:00" />
+    <div class="form-row">
+      <label for="guests_number">Кількість гостей:</label>
+      <input type="number" id="guests_number" name="guests_number" min="1" max="20" required>
+    </div>
 
-            <label for="details">Додаткові побажання</label>
-            <textarea id="details" name="details" rows="3"></textarea>
+    <div class="form-row">
+      <label for="reservation_date">Дата:</label>
+      <input type="date" id="reservation_date" name="reservation_date" required>
+    </div>
 
-            <input type="submit" value="Забронювати столик" />
-        </form>
-    </main>
+    <div class="form-row">
+      <label for="reservation_time">Час:</label>
+      <input type="time" id="reservation_time" name="reservation_time" min="08:00" max="22:00" required>
+    </div>
 
-    <script>
-        const dateInput = document.getElementById('reservation_date');
-        const timeInput = document.getElementById('reservation_time');
-        const form = document.getElementById('reservation-form');
+    <div class="form-row">
+      <label for="details">Додаткові побажання:</label>
+      <textarea id="details" name="details" rows="3"></textarea>
+    </div>
 
-        const now = new Date();
-        const today = now.toISOString().split('T')[0];
-        dateInput.min = today;
+    <div class="submit-row">
+      <input type="submit" value="Забронювати">
+    </div>
+  </form>
+  {% endif %}
+</div>
 
-        form.addEventListener('submit', function(e) {
-            const selectedDate = dateInput.value;
-            const selectedTime = timeInput.value;
+{% if not success %}
+<script>
+  const dateInput = document.getElementById('reservation_date');
+  const timeInput = document.getElementById('reservation_time');
+  const form = document.getElementById('reservation-form');
 
-            if (!selectedDate || !selectedTime) return;
+  const now = new Date();
+  const today = now.toISOString().split('T')[0];
+  dateInput.min = today;
 
-            const [hours, minutes] = selectedTime.split(':').map(Number);
-            const selectedDateTime = new Date(selectedDate);
-            selectedDateTime.setHours(hours, minutes, 0, 0);
+  form.addEventListener('submit', function(e) {
+    const selectedDate = dateInput.value;
+    const selectedTime = timeInput.value;
 
-            const currentTime = new Date();
+    if (!selectedDate || !selectedTime) return;
 
-            if (selectedDate === today && selectedDateTime < currentTime) {
-                e.preventDefault();
-                alert('Виберіть час, який ще не минув.');
-                return;
-            }
-        });
+    const [hours, minutes] = selectedTime.split(':').map(Number);
+    const selectedDateTime = new Date(selectedDate);
+    selectedDateTime.setHours(hours, minutes, 0, 0);
 
-    </script>
-</body>
-</html>
+    const currentTime = new Date();
 
-
+    if (selectedDate === today && selectedDateTime < currentTime) {
+      e.preventDefault();
+      alert('Виберіть час, який ще не минув.');
+    }
+  });
+</script>
+{% endif %}
+{% endblock %}
