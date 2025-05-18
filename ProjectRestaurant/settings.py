@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -56,25 +55,20 @@ ROOT_URLCONF = 'ProjectRestaurant.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # тут має бути правильний шлях до templates
+        'DIRS': [BASE_DIR / 'templates']
+        ,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.static',  # обов'язково має бути!
             ],
         },
     },
 ]
 
-
 WSGI_APPLICATION = 'ProjectRestaurant.wsgi.application'
-
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
 
 
 # Database
@@ -118,13 +112,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-LOGOUT_REDIRECT_URL = reverse_lazy('home')
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 # Media files (images, uploads)
 MEDIA_URL = '/media/'

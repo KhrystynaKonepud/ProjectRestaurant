@@ -16,4 +16,3 @@ class Reservation(models.Model):
     def __str__(self):
         return (f"Бронювання від {self.first_name} {self.last_name} "
                 f"на {self.reservation_date} о {self.reservation_time}")
-
