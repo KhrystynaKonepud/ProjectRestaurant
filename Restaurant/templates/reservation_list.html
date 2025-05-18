@@ -1,0 +1,63 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Мої бронювання — Oishii{% endblock %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/admin_custom.css' %}">
+<style>
+  .reservation-item {
+    border: 1px solid #ccc;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    max-width: 600px;
+  }
+  .cancel-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .cancel-btn:hover {
+    background-color: #c82333;
+  }
+  form.filter-form {
+    margin-bottom: 20px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1 style="color: var(--header-bg); text-align: left;">Мої бронювання</h1>
+
+<form method="get" class="filter-form">
+  <label for="date">Фільтр за датою:</label>
+  <input type="date" id="date" name="date" value="{{ selected_date }}">
+  <button type="submit">Фільтрувати</button>
+  <a href="{% url 'reservation_list' %}">Скинути</a>
+</form>
+
+{% if reservations %}
+  {% for res in reservations %}
+  <div class="reservation-item">
+    <p><strong>{{ res.first_name }} {{ res.last_name }}</strong></p>
+    <p>Телефон: {{ res.phone }}</p>
+    <p>Гостей: {{ res.guests_number }}</p>
+    <p>Дата: {{ res.reservation_date }}</p>
+    <p>Час: {{ res.reservation_time }}</p>
+    <p>Побажання: {{ res.details|default:"(немає)" }}</p>
+    <form method="post" style="margin-top:10px;">
+      {% csrf_token %}
+      <input type="hidden" name="cancel_id" value="{{ res.id }}">
+      <button type="submit" class="cancel-btn" onclick="return confirm('Ви впевнені, що хочете скасувати бронювання?');">Скасувати бронювання</button>
+    </form>
+  </div>
+  {% endfor %}
+{% else %}
+  <p>Немає бронювань.</p>
+{% endif %}
+
+{% endblock %}
