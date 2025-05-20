@@ -2,23 +2,24 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>{% block title %}OishiI{% endblock %}</title>
+  <title>{% block title %}Oishii{% endblock %}</title>
   {% load static %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
+
     :root {
       --main-color: #f15a29;
-      --background: #fdf6ef;
       --header-bg: #3b4651;
       --white: #fff;
     }
+    <style>
 
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--background);
+      background: url("{% static 'background.png' %}") no-repeat center center fixed;
+      background-size: cover;
     }
 
     body {
@@ -52,7 +53,7 @@
     }
 
     main {
-      flex: 1; /* дозволяє займати весь доступний простір */
+      flex: 1;
     }
 
     .hero {
@@ -78,7 +79,7 @@
 
     .info-section {
       max-width: 900px;
-      margin: 0 auto;
+      margin: 0 auto 40px;
       padding: 2rem;
       text-align: center;
       background: rgba(255, 255, 255, 0.9);
@@ -117,5 +118,3 @@
   </footer>
 </body>
 </html>
-
-
