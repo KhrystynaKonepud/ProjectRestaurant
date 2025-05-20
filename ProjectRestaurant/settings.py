@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Restaurant',  # ← додай назву свого застосунку
+    'Restaurant',
 ]
 
 MIDDLEWARE = [
