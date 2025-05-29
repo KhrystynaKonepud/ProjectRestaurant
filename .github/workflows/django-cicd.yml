@@ -51,6 +51,9 @@ jobs:
     - name: Collect static
       run: python manage.py collectstatic --noinput
 
+    - name: Install Heroku CLI
+      run: |
+        curl https://cli-assets.heroku.com/install.sh | sh
 
     - name: Deploy
       uses: akhileshns/heroku-deploy@v3.12.12
