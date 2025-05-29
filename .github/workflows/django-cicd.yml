@@ -63,4 +63,3 @@ jobs:
         heroku_email: ${{ secrets.HEROKU_EMAIL }}
         usedocker: false
         branch: main
-        appdir: .
