@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Меню - Oishii{% endblock %}
+
+{% block content %}
+<div style="padding: 2rem;">
+  <h1 class="menu-title">Меню</h1>
+
+  <!-- Категорії -->
+  <div class="category-buttons">
+    {% for cat in categories %}
+      <a href="{% url 'menu_by_category' cat.slug %}"
+         class="category-button {% if selected_category and cat.id == selected_category.id %}active{% endif %}">
+        {{ cat.name }}
+      </a>
+    {% endfor %}
+  </div>
+
+  <!-- Картки страв -->
+  <div class="card-container">
+    {% for dish in dishes %}
+      <a href="{% url 'dish_detail' dish.slug %}" class="card">
+        <img src="{{ dish.photo.url }}" alt="{{ dish.name }}">
+        <div>
+          <h3>{{ dish.name }}</h3>
+          <p>Вага: {{ dish.weight }} г</p>
+          <p>Ціна: {{ dish.price }} ₴</p>
+        </div>
+      </a>
+    {% endfor %}
+
+    <!-- Картки напоїв -->
+    {% for beverage in beverages %}
+      <a href="{% url 'beverage_detail' beverage.slug %}" class="card">
+        <img src="{{ beverage.photo.url }}" alt="{{ beverage.name }}">
+        <div>
+          <h3>{{ beverage.name }}</h3>
+          <p>Обʼєм: {{ beverage.volume }} мл</p>
+          <p>Ціна: {{ beverage.price }} ₴</p>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

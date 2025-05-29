@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}OishiI{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+  :root {
+    --main-color: #f15a29;
+    --background: #fdf6ef;
+    --header-bg: #3b4651;
+    --white: #fff;
+    --btn-hover: #d64e1f;
+    --table-border: #ccc;
+    --table-header-bg: #f15a29;
+    --table-row-hover: #fde8db;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background);
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  nav {
+    background-color: var(--header-bg);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  nav .logo {
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  nav strong {
+    color: var(--white);
+    font-size: 1.5rem;
+  }
+
+  .menu a {
+    color: var(--white);
+    margin-left: 1.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  .menu a:hover {
+    color: var(--main-color);
+  }
+
+  .menu-link {
+  color: var(--white);
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.menu-link:hover {
+  color: var(--main-color);
+}
+
+
+  main {
+    flex: 1; /* дозволяє займати весь доступний простір */
+    padding: 20px;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 120px 20px 60px;
+  }
+
+  .hero img {
+    width: 300px;
+    max-width: 90%;
+  }
+
+  /* Стиль кнопок */
+  .btn {
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    padding: 14px 32px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 30px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(241, 90, 41, 0.3);
+  }
+  .btn:hover,
+  .btn:focus {
+    background-color: var(--btn-hover);
+    box-shadow: 0 6px 12px rgba(214, 78, 31, 0.6);
+    outline: none;
+  }
+
+  /* Таблиці */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1rem;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  }
+
+  /* Посилання в таблицях */
+table a {
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+table a:hover {
+  color: var(--header-bg);
+}
+
+
+  th, td {
+    padding: 12px 15px;
+    border: 1px solid var(--table-border);
+    text-align: left;
+  }
+
+  th {
+    background-color: var(--table-header-bg);
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tr:hover {
+    background-color: var(--table-row-hover);
+  }
+
+  .info-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+
+  footer {
+    background-color: var(--header-bg);
+    color: var(--white);
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.85rem;
+  }
+
+input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  textarea,
+  select {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 12px;
+    margin: 8px 0 20px 0;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  input[type="email"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: var(--main-color);
+    box-shadow: 0 0 8px rgba(241, 90, 41, 0.5);
+    outline: none;
+  }
+
+  label {
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .submit-row input[type="submit"] {
+  background-color: var(--main-color);
+  color: var(--white);
+  border: none;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(241, 90, 41, 0.3);
+  font-weight: 600;
+  width: 100%;
+  max-width: 400px;
+  display: block;
+  margin-top: 10px;
+}
+
+.submit-row input[type="submit"]:hover,
+.submit-row input[type="submit"]:focus {
+  background-color: var(--btn-hover);
+  box-shadow: 0 6px 12px rgba(214, 78, 31, 0.6);
+  outline: none;
+}
+
+
+</style>
+
+</head>
+<body>
+  <nav>
+    <div style="display: flex; align-items: center;">
+      <img src="{% static 'logo.png' %}" alt="Oishii Logo" class="logo">
+      <strong>Oishii</strong>
+    </div>
+    <div class="menu">
+
+      <a href="{% url 'home' %}">Головна</a>
+      <a href="{% url 'menu' %}">Меню</a>
+      {% if user.is_staff %}
+      <a href="{% url 'reservation_list' %}" class="button">Бронювання</a>
+      {% endif %}
+        {% if request.user.is_authenticated %}
+    <form action="{% url 'admin:logout' %}" method="post" style="display:inline;">
+  {% csrf_token %}
+  <button type="submit" class="menu-link logout-button">Вийти</button>
+</form>
+
+  {% endif %}
+    </div>
+  </nav>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    © 2025 Oishii. Усі права захищені.
+  </footer>
+</body>
+</html>
+
+

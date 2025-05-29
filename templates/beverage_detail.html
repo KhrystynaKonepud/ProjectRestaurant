@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}{{ beverage.name }} - Oishii{% endblock %}
+
+{% block content %}
+<div class="detail-container">
+  <a href="{% url 'menu' %}" class="back-button">Назад до меню</a>
+  <h1 style="margin-bottom: 1.5rem;">{{ beverage.name }}</h1>
+
+  <div class="detail-wrapper">
+    <div class="detail-image">
+      <img src="{{ beverage.photo.url }}" alt="{{ beverage.name }}">
+      <p><strong>Ціна:</strong> <span style="color: var(--main-color); font-weight: bold;">{{ beverage.price }} ₴</span></p>
+    </div>
+
+    <div class="detail-info">
+      <p><strong>Інгредієнти:</strong> {{ beverage.ingredients }}</p>
+      {% if beverage.description %}
+        <p>{{ beverage.description }}</p>
+      {% endif %}
+      {% if beverage.is_alcoholic %}
+        <p class="tag alcoholic"><span style="font-size: 1.2em;">🍷</span> Алкогольний напій</p>
+      {% endif %}
+      <p><strong>Обʼєм:</strong> {{ beverage.volume }} мл</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

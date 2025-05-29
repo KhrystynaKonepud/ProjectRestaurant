@@ -1,0 +1,1 @@
+web: gunicorn ProjectRestaurant.wsgi --log-file - --log-level debug

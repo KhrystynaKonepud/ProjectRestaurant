@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}{{ dish.name }} - Oishii{% endblock %}
+
+{% block content %}
+<div class="detail-container">
+  <a href="{% url 'menu' %}" class="back-button">Назад до меню</a>
+  <h1 style="margin-bottom: 1.5rem;">{{ dish.name }}</h1>
+
+  <div class="detail-wrapper">
+    <div class="detail-image">
+      <img src="{{ dish.photo.url }}" alt="{{ dish.name }}">
+      <p><strong>Ціна:</strong> <span style="color: var(--main-color); font-weight: bold;">{{ dish.price }} ₴</span></p>
+    </div>
+
+    <div class="detail-info">
+      <p><strong>Інгредієнти:</strong> {{ dish.ingredients }}</p>
+      {% if dish.description %}
+        <p>{{ dish.description }}</p>
+      {% endif %}
+      <div>
+        {% if dish.is_spicy %}
+          <span class="tag spicy"><span style="font-size: 1.3em;">🌶️</span> Гостра страва</span>
+        {% endif %}
+        {% if dish.is_vegetarian %}
+          <span class="tag vegetarian"><span style="font-size: 1.3em;">🌱</span> Вегетаріанська страва</span>
+        {% endif %}
+      </div>
+      <p><strong>Вага:</strong> {{ dish.weight }} г</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

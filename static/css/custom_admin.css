@@ -1,0 +1,457 @@
+/* static/css/custom_admin.css */
+
+:root {
+  --main-color: #f15a29;
+  --main-color-hover: #d44e1f;
+  --background: #fdf6ef;
+  --header-bg: #3b4651;
+  --white: #fff;
+  --font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --link-color: var(--main-color);
+  --link-hover-color: #b3401a;
+  --success-color: #28a745; /* Зелений для успіху */
+  --danger-color: #dc3545; /* Червоний для видалення/помилок */
+  --warning-color: #ffc107; /* Жовтий для попереджень */
+  --info-color: #17a2b8; /* Синій для інформації */
+  --secondary-color: #6c757d; /* Сірий для вторинних елементів */
+}
+
+html, body {
+  background-color: var(--background);
+  font-family: var(--font);
+}
+
+#header {
+  background-color: var(--header-bg);
+  padding: 10px 20px;
+  display: flex; /* Вирівнювання логотипу та заголовка */
+  align-items: center;
+  justify-content: space-between; /* Розтягнути хедер */
+}
+
+#site-name { /* ID для блоку h1 з посиланням на головну адмінки */
+    flex-grow: 1; /* Дозволяє займати весь доступний простір */
+    margin-right: 20px; /* Відступ від меню користувача */
+}
+
+#header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+#header h1 a {
+  color: var(--white);
+  text-decoration: none;
+  display: flex; /* Вирівнювання логотипу та тексту */
+  align-items: center;
+}
+
+#branding h1::before {
+  content: "";
+  display: inline-block;
+  background: url("/static/logo.png") no-repeat center;
+  background-size: contain;
+  width: 35px; /* Трохи зменшено розмір для компактності */
+  height: 35px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+#user-tools { /* Меню користувача в хедері (VIEW SITE, LOG OUT) */
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Відступ між посиланнями */
+}
+
+#user-tools a { /* Посилання в меню користувача */
+  color: var(--white);
+  text-decoration: none;
+  font-weight: normal;
+}
+
+#user-tools a:hover {
+   text-decoration: underline;
+}
+
+
+/* Загальні посилання в контенті адмінки (не в хедері) */
+#content a:link, #content a:visited {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+#content a:hover, #content a:focus {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+/* Заголовки модулів (Authentication, Restaurant тощо) */
+.module h2, .module caption {
+  color: var(--header-bg);
+  background-color: #e0e0e0; /* Світліший фон для заголовка модуля */
+  padding: 10px 15px;
+  margin: 0; /* Прибрати стандартні відступи */
+  border-bottom: 1px solid #ccc;
+  font-size: 1.2rem;
+}
+
+/* Контейнер списку моделей всередині модуля */
+.module ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc; /* Рамка навколо всього модуля */
+    border-top: none; /* Прибрати верхню рамку, бо є у заголовка */
+    background-color: #fff; /* Білий фон для вмісту модуля */
+}
+
+/* Стиль для кожного рядка з посиланнями (кожну модель) */
+.module ul li {
+    padding: 8px 15px; /* Відступи всередині "рядка" */
+    border-bottom: 1px solid #eee; /* Розділювач між рядками */
+    display: flex; /* Використовуємо Flexbox для вирівнювання елементів у рядку */
+    align-items: center; /* Вертикальне вирівнювання по центру */
+    justify-content: space-between; /* Розтягнути простір між назвою моделі та діями */
+    flex-wrap: wrap; /* Дозволити перенос рядків, якщо вміст не поміщається */
+}
+
+/* Колір фону при наведенні на рядок моделі */
+.module ul li:hover {
+    background-color: #f5f5f5;
+}
+
+/* Стиль для назви моделі (перше посилання в рядку) */
+.module ul li a:first-child {
+    font-weight: normal; /* Не робити жирним за замовчуванням */
+    color: #333; /* Колір тексту назви моделі */
+    flex-grow: 1; /* Дозволити назві моделі займати більшу частину простору */
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+/* Стиль контейнера для посилань "Add" та "Change" (якщо він є, наприклад <p class="actionlist">) */
+/* Якщо такого контейнера немає, стилізуйте a.addlink та a.changelink напряму */
+.module ul li .actionlist { /* Приклад селектора, може відрізнятись */
+   display: flex;
+   align-items: center;
+   gap: 8px; /* Відступ між кнопками "Add" та "Change" */
+}
+
+
+/* Стилі для посилань "Add" та "Change" (самі кнопки/лінки дій) */
+.module ul li a.addlink,
+.module ul li a.changelink {
+    display: inline-block; /* Щоб застосувати відступи та розміри */
+    padding: 3px 8px;
+    border: 1px solid;
+    border-radius: 4px;
+    font-size: 0.8em; /* Менший розмір шрифту */
+    text-transform: uppercase; /* Текст великими літерами */
+    font-weight: bold; /* Зробити текст жирним */
+    text-align: center;
+    min-width: 50px; /* Мінімальна ширина для вирівнювання */
+    box-sizing: border-box; /* Включити відступ у розмір */
+}
+
+.module ul li a.addlink {
+    color: var(--white); /* Білий текст */
+    background-color: var(--success-color); /* Зелений фон */
+    border-color: #4cae4c;
+}
+
+.module ul li a.changelink {
+    color: var(--white); /* Білий текст */
+    background-color: var(--info-color); /* Синій фон */
+    border-color: #138496;
+}
+
+.module ul li a.addlink:hover, .module ul li a.changelink:hover {
+    opacity: 0.9; /* Зробити трохи прозорішим при наведенні */
+    text-decoration: none; /* Прибрати підкреслення при наведенні */
+}
+
+
+/* Стилі для кнопок (Submit, Save, Cancel тощо) */
+.button, input[type="submit"], input[type="button"], .submit-row input {
+  background-color: var(--main-color);
+  color: var(--white);
+  border: none;
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #b33e16;
+  transition: background-color 0.3s ease, box-shadow 0.2s ease, transform 0.1s ease;
+  text-transform: uppercase;
+  font-size: 0.9em; /* Зробити шрифт трохи меншим для кнопок */
+}
+
+.button:hover, input[type="submit"]:hover, .submit-row input:hover,
+.button:focus, input[type="submit"]:focus, .submit-row input:focus {
+  background-color: var(--main-color-hover);
+  box-shadow: 0 2px 0 #962e0f;
+  outline: none;
+  transform: translateY(1px);
+}
+
+.button:active, input[type="submit"]:active, .submit-row input:active {
+  box-shadow: none;
+  transform: translateY(2px);
+}
+
+/* Кнопки видалення */
+.button.default.deletelink, .submit-row input.default.deletelink {
+  background-color: var(--danger-color); /* Червоний фон */
+  box-shadow: 0 3px 0 #c82333;
+}
+.button.default.deletelink:hover, .submit-row input.default.deletelink:hover {
+    background-color: #c82333;
+    box-shadow: 0 2px 0 #bd2130;
+}
+.button.default.deletelink:active, .submit-row input.default.deletelink:active {
+    box-shadow: none;
+    transform: translateY(2px);
+}
+
+
+/* Повідомлення (Success, Error, Warning) */
+ul.messagelist {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+ul.messagelist li {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: 1px solid transparent; /* Додано прозору рамку за замовчуванням */
+}
+ul.messagelist li.success {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+ul.messagelist li.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+}
+ul.messagelist li.warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border-color: #ffeeba;
+}
+
+
+/* Підвал */
+#footer {
+  background-color: var(--header-bg);
+  color: var(--white);
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 0.85rem;
+  margin-top: 30px; /* Збільшено відступ зверху */
+}
+
+/* Таблиці (Change list view) */
+table {
+  background-color: #fff;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+  border-radius: 5px; /* Додано заокруглення кутів таблиці */
+  overflow: hidden; /* Важливо для відображення заокруглень з рамками */
+}
+
+table thead th { /* Стилі для заголовків стовпців таблиці */
+  background-color: #eee;
+  color: #333;
+  padding: 10px 8px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+
+table tbody td { /* Стилі для комірок даних таблиці */
+  padding: 10px 8px;
+  border-top: 1px solid #eee;
+}
+
+table tbody tr:nth-child(odd) { /* Стиль для непарних рядків */
+  background-color: #f9f9f9;
+}
+table tbody tr:hover { /* Стиль при наведенні на рядок */
+  background-color: #e9e9e9;
+}
+
+
+/* Форми (Add/Change views) */
+.form-row {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  display: flex; /* Використання flexbox для форми */
+  align-items: center;
+}
+.form-row label {
+    font-weight: bold;
+    padding-right: 10px;
+    flex-basis: 150px; /* Фіксована ширина для підписів */
+    flex-shrink: 0; /* Не зменшувати ширину підпису */
+}
+
+/* Стилі для полів вводу */
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="url"], textarea, select {
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  flex-grow: 1; /* Поле займає весь доступний простір */
+  max-width: 400px; /* Обмежити максимальну ширину полів */
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="url"]:focus, textarea:focus, select:focus {
+  border-color: var(--main-color);
+  outline: none;
+  box-shadow: 0 0 5px rgba(241, 90, 41, 0.3);
+}
+
+textarea {
+    height: 100px; /* Висота для текстових полів */
+    resize: vertical; /* Дозволити змінювати розмір лише по вертикалі */
+}
+
+
+/* Inline форми (OneToMany зв'язки) */
+.inline-group {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #fff;
+}
+.inline-group h2 {
+    background-color: #e0e0e0;
+    padding: 10px 15px;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    font-size: 1.1em;
+    color: var(--header-bg);
+}
+.inline-group .form-row {
+    border-bottom: 1px solid #eee;
+    padding: 8px 15px;
+}
+.inline-group .form-row:last-child {
+    border-bottom: none;
+}
+.inline-group .add-row { /* Кнопка "Add another..." */
+    padding: 10px 15px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #eee;
+}
+
+
+/* static/css/custom_admin.css */
+
+/* ... попередні стилі ... */
+
+/* Секція для стилізації сторінки логіну */
+.login #content {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.login #content h1 {
+  text-align: center;
+  color: var(--header-bg);
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.login form .form-row {
+    border-bottom: none;
+    padding: 8px 0;
+    display: block;
+}
+
+.login form .form-row label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* === ЗМІНЕНІ СТИЛІ ДЛЯ ПОЛІВ ВВОДУ НА СТОРІНЦІ ЛОГІНУ === */
+.login form input[type="text"],
+.login form input[type="password"] {
+    width: 100%;
+    /* Збільшуємо розмір шрифту */
+    font-size: 1.1rem; /* Можна спробувати 1.2rem, якщо 1.1rem замало */
+    /* Можна трохи збільшити внутрішні відступи, якщо потрібно */
+    padding: 12px; /* Збільшено з 10px для кращого вигляду зі збільшеним шрифтом */
+
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    max-width: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Додано плавний перехід */
+}
+
+.login form input[type="text"]:focus,
+.login form input[type="password"]:focus {
+  border-color: var(--main-color); /* Колір рамки при фокусі */
+  outline: none; /* Прибираємо стандартне синє обведення */
+  box-shadow: 0 0 5px rgba(241, 90, 41, 0.5); /* Додаємо тінь при фокусі */
+}
+/* ========================================================= */
+
+
+.login .submit-row {
+  text-align: center;
+  margin-top: 20px;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  border: none;
+}
+
+.login .submit-row input { /* Стилі для самої кнопки "Log in" */
+  background-color: var(--main-color);
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #b33e16;
+  transition: background-color 0.3s ease, box-shadow 0.2s ease, transform 0.1s ease;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.login .submit-row input:hover,
+.login .submit-row input:focus {
+  background-color: var(--main-color-hover);
+  box-shadow: 0 2px 0 #962e0f;
+  outline: none;
+  transform: translateY(1px);
+}
+
+.login .submit-row input:active {
+  box-shadow: none;
+  transform: translateY(2px);
+}
+/* ... інші стилі ... */
+
+
+/* Додаткові стилі для вирівнювання логотипу в хедері */
+/* Ці стилі вже були і допомагають вирівняти логотип та текст заголовка */
+/* #header #branding */
+/* #header #branding h1 */
