@@ -131,6 +131,8 @@ LOGOUT_REDIRECT_URL = reverse_lazy('home')
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 # Media files (images, uploads)
 MEDIA_URL = '/media/'
